@@ -1,16 +1,23 @@
-const BASE_URL = "http://localhost:5000/api/workouts";
+const BASE_URL = `${import.meta.env.VITE_API_URL}/workouts`;
 
 const getToken = () => localStorage.getItem("token");
 
+/* =========================
+   GET WORKOUT PLAN
+========================= */
 export async function getWorkoutPlan() {
   const res = await fetch(`${BASE_URL}/plan`, {
     headers: {
       Authorization: `Bearer ${getToken()}`
     }
   });
+
   return { status: res.status, result: await res.json() };
 }
 
+/* =========================
+   SAVE WORKOUT PLAN
+========================= */
 export async function saveWorkoutPlan(plan) {
   const res = await fetch(`${BASE_URL}/plan`, {
     method: "POST",
@@ -20,5 +27,6 @@ export async function saveWorkoutPlan(plan) {
     },
     body: JSON.stringify({ plan })
   });
-  return res.json();
+
+  return { status: res.status, result: await res.json() };
 }

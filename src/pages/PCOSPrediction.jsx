@@ -18,7 +18,7 @@ const PCOSPrediction = () => {
       setResult("");
 
       const res = await axios.post(
-        "http://localhost:5000/api/pcos/predict-pcos",
+        `${import.meta.env.VITE_API_URL}/pcos/predict-pcos`,
         form
       );
 

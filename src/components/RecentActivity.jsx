@@ -4,12 +4,19 @@ import axios from "axios";
 export default function RecentActivity() {
   const [activity, setActivity] = useState([]);
 
+  const API_URL =
+    import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/stats/recent-activity")
+      .get(`${API_URL}/stats/recent-activity`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      })
       .then((res) => setActivity(res.data))
-      .catch((err) => console.log(err));
-  }, []);
+      .catch((err) => console.error("Activity fetch failed:", err));
+  }, [API_URL]);
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-purple-200 p-6">

@@ -17,7 +17,7 @@ export default function UsersPage() {
       }
 
       const res = await axios.get(
-        `http://localhost:5000/api/users?search=${search}`,
+        `${import.meta.env.VITE_API_URL}/users?search=${search}`,
         {
           headers: {
             Authorization: `Bearer ${token}`, // ✅ REQUIRED

@@ -89,7 +89,7 @@ const SkincareRoutine = () => {
   const saveProfile = async () => {
     try {
       await axios.post(
-        "http://localhost:5000/api/skincare/profile",
+        `${import.meta.env.VITE_API_URL}/skincare/profile`,
         form,
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
@@ -103,7 +103,7 @@ const SkincareRoutine = () => {
   /* -------- LOAD ROUTINE -------- */
   const loadRoutine = () => {
     axios
-      .get("http://localhost:5000/api/skincare/routine", {
+      .get(`${import.meta.env.VITE_API_URL}/skincare/routine`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       })
       .then((res) => {

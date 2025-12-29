@@ -23,7 +23,9 @@ const DietPlanView = () => {
   useEffect(() => {
     const fetchPlan = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/diet/current");
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/diet/current`
+        );        
         if (res.data && res.data.weekMatches) {
           setPlan(res.data.weekMatches);
         } else {

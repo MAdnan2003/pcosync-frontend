@@ -15,7 +15,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/stats")
+      .get(`${import.meta.env.VITE_API_URL}/stats`)
       .then((res) => setMetrics(res.data))
       .catch((err) => console.log(err));
   }, []);

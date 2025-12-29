@@ -1,6 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 
+/**
+ * Use backend API from env in production,
+ * fallback to localhost during development
+ */
+const API_BASE =
+  import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+
 export default function AddUserModal({ open, onClose, onUserAdded }) {
   const [form, setForm] = useState({ name: "", email: "" });
 
@@ -11,7 +18,7 @@ export default function AddUserModal({ open, onClose, onUserAdded }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios.post("http://localhost:5000/api/users", form);
+    await axios.post(`${API_BASE}/users`, form);
 
     onUserAdded();   // Refresh UsersPage
     onClose();       // Close modal

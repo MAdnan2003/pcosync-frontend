@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5000/api/diet";
+const API_BASE = `${import.meta.env.VITE_API_URL}/diet`;
 
 const getToken = () => localStorage.getItem("token");
 
@@ -11,8 +11,12 @@ export const getDietPlan = async () => {
     });
 
     const data = await res.json();
+
     return { status: res.status, result: data };
-  } catch {
+
+  } catch (err) {
+    console.error("Diet plan fetch failed:", err);
+
     return {
       status: 500,
       result: { message: "Failed to fetch diet plan" }

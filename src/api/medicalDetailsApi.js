@@ -1,11 +1,15 @@
 // frontend/src/api/medicalDetailsApi.js
 
-const BASE_URL = "http://localhost:5000/api/medical-details";
+const BASE_URL = `${import.meta.env.VITE_API_URL}/medical-details`;
 
+const getToken = () => localStorage.getItem("token");
 
+/* =========================
+   CREATE MEDICAL DETAILS
+========================= */
 export async function createMedicalDetails(data) {
   try {
-    const token = localStorage.getItem("token");
+    const token = getToken();
 
     if (!token) {
       return {
@@ -25,8 +29,10 @@ export async function createMedicalDetails(data) {
 
     const result = await response.json();
     return { status: response.status, result };
+
   } catch (error) {
     console.error("Error calling createMedicalDetails:", error);
+
     return {
       status: 500,
       result: { success: false, message: "Network error" }
@@ -34,10 +40,12 @@ export async function createMedicalDetails(data) {
   }
 }
 
-
+/* =========================
+   GET CURRENT USER DETAILS
+========================= */
 export async function getMyMedicalDetails() {
   try {
-    const token = localStorage.getItem("token");
+    const token = getToken();
 
     if (!token) {
       return {
@@ -55,8 +63,10 @@ export async function getMyMedicalDetails() {
 
     const result = await response.json();
     return { status: response.status, result };
+
   } catch (error) {
     console.error("Error calling getMyMedicalDetails:", error);
+
     return {
       status: 500,
       result: { success: false, message: "Network error" }

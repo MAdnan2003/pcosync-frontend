@@ -7,12 +7,12 @@ export default function ReportsPage() {
   const [stats, setStats] = useState(null);
 
   const fetchReports = async () => {
-    const res = await fetch("http://localhost:5000/api/reports");
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/reports`);
     setReports(await res.json());
   };
 
   const fetchStats = async () => {
-    const res = await fetch("http://localhost:5000/api/reports/stats");
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/reports/stats`);
     setStats(await res.json());
   };
 

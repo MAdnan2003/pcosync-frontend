@@ -3,9 +3,13 @@ import axios from "axios";
 export default function UserRow({ user, refresh }) {
   const token = localStorage.getItem("token");
 
+  // ✅ Use ENV backend URL (works on Vercel + Render + Local)
+  const API_BASE =
+    import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+
   const toggleSuspend = async () => {
     await axios.patch(
-      `http://localhost:5000/api/users/${user._id}/suspend`,
+      `${API_BASE}/users/${user._id}/suspend`,
       {},
       {
         headers: {
@@ -18,7 +22,7 @@ export default function UserRow({ user, refresh }) {
 
   const remove = async () => {
     await axios.delete(
-      `http://localhost:5000/api/users/${user._id}`,
+      `${API_BASE}/users/${user._id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`

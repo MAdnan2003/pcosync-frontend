@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5000/api/workout-progress";
+const API_BASE = `${import.meta.env.VITE_API_URL}/workout-progress`;
 
 const getToken = () => localStorage.getItem("token");
 
@@ -15,7 +15,10 @@ export const getWorkoutStats = async () => {
 
     const data = await res.json();
     return { status: res.status, result: data };
-  } catch {
+
+  } catch (err) {
+    console.error("Failed to fetch workout stats:", err);
+
     return {
       status: 500,
       result: { message: "Failed to fetch workout stats" }
@@ -39,7 +42,10 @@ export const logWorkout = async (payload) => {
 
     const data = await res.json();
     return { status: res.status, result: data };
-  } catch {
+
+  } catch (err) {
+    console.error("Failed to log workout:", err);
+
     return {
       status: 500,
       result: { message: "Failed to log workout" }

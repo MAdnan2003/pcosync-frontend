@@ -36,7 +36,10 @@ const DietPlanForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post("http://localhost:5000/api/diet/generate", formData);
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/diet/generate`,
+        formData
+      );
       setLoading(false);
       navigate("/diet-plan");
     } catch (error) {

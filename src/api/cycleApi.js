@@ -1,4 +1,5 @@
-const BASE_URL = "/api/cycle";
+const API_URL = import.meta.env.VITE_API_URL;
+const BASE_URL = `${API_URL}/cycles`;
 
 const getToken = () => localStorage.getItem("token");
 
@@ -11,6 +12,7 @@ export async function getCycleLogs() {
       Authorization: `Bearer ${getToken()}`
     }
   });
+
   return res.json();
 }
 
@@ -26,6 +28,7 @@ export async function saveCycleLog(data) {
     },
     body: JSON.stringify(data)
   });
+
   return res.json();
 }
 
@@ -38,5 +41,6 @@ export async function getCycleStats() {
       Authorization: `Bearer ${getToken()}`
     }
   });
+
   return res.json();
 }

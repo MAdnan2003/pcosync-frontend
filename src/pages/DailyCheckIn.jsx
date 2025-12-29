@@ -43,7 +43,7 @@ const DailyCheckIn = () => {
       const today = new Date().toISOString().split('T')[0];
       
       const response = await axios.get(
-        `http://localhost:5000/api/daily-checkin/${today}`,
+        `${import.meta.env.VITE_API_URL}/daily-checkin/${today}`  ,
         {
           headers: { Authorization: `Bearer ${token}` }
         }
@@ -110,7 +110,7 @@ const DailyCheckIn = () => {
       const token = localStorage.getItem('token');
 
       await axios.post(
-        'http://localhost:5000/api/daily-checkin',
+        `${import.meta.env.VITE_API_URL}/daily-checkin`,
         checkInData,
         {
           headers: { Authorization: `Bearer ${token}` }

@@ -12,6 +12,10 @@ const TryOnResult = () => {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
+  // ✅ Use backend URL from env (works on Vercel + Render + Local)
+  const API_BASE =
+    import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!modelImg || !clothImg) {
@@ -28,10 +32,12 @@ const TryOnResult = () => {
       formData.append("cloth", clothImg);
 
       const res = await axios.post(
-        "http://localhost:5000/api/tryon/generate",
+        `${API_BASE}/tryon/generate`,
         formData,
         {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: {
+            "Content-Type": "multipart/form-data",
+          }
         }
       );
 
